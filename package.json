@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "antd-mobile": "^2.1.8",
+    "axios": "^0.18.0",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
+    "qs": "^6.5.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
@@ -26,5 +28,11 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8000",
+      "ws": true
+    }
   }
 }
