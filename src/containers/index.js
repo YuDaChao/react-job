@@ -1,12 +1,20 @@
 import React from 'react'
 import {
-  Button
-} from 'antd-mobile'
+  Switch,
+  Route,
+} from 'react-router-dom'
+
+
+import BossDetail from '../containers/Boss/DetailInfo'
+import NiurenDetail from '../containers/NiuRen/DetailInfo'
 
 class Main extends React.PureComponent {
   render() {
     return(
-      <Button type="primary">Main</Button>
+      <Switch>
+        <Route path="/boss" exact component={BossDetail} />
+        <Route path="/niuren" exact component={NiurenDetail} />
+      </Switch>
     )
   }
 }

@@ -44,6 +44,14 @@ class Login extends React.PureComponent {
   };
 
   render() {
+    const { user } = this.props;
+    if (user) {
+      if (user.role === 0) {
+        this.props.history.push('/niuren')
+      } else {
+        this.props.history.push('/boss')
+      }
+    }
 
     return(
       <WingBlank>
@@ -68,8 +76,12 @@ class Login extends React.PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+});
+
 const mapDispatchToProps = {
   login: userAction.login
 };
 
-export default connect(undefined, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

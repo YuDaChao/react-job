@@ -98,7 +98,11 @@ class Register extends React.PureComponent {
       { value: 1, label: '老板'},
     ];
     if (user) {
-      this.props.history.push('/')
+      if (user.roleValue === "0") {
+        this.props.history.push('/')
+      } else {
+        this.props.history.push('/boss')
+      }
     }
     return(
       <WingBlank className="register">

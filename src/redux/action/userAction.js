@@ -1,5 +1,5 @@
 import createAsyncAction from '../../utils/createAsyncAction'
-import { signUp, signIn } from '../../api/user'
+import { signUp, signIn, completeUserInfo } from '../../api/user'
 
 function login(userName, password) {
   return createAsyncAction('GET_USER', () => {
@@ -13,7 +13,14 @@ function register(userInfo) {
   })
 }
 
+function complete(userInfo) {
+  return createAsyncAction('REGISTER', () => {
+    return completeUserInfo(userInfo)
+  })
+}
+
 export default {
   login,
-  register
+  register,
+  complete
 }
