@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect} from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import {
   WingBlank,
   WhiteSpace,
@@ -98,11 +99,7 @@ class Register extends React.PureComponent {
       { value: 1, label: '老板'},
     ];
     if (user) {
-      if (user.roleValue === "0") {
-        this.props.history.push('/')
-      } else {
-        this.props.history.push('/boss')
-      }
+      return <Redirect to="/login" />
     }
     return(
       <WingBlank className="register">

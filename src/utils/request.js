@@ -18,8 +18,8 @@ function request(method = "GET", url, params) {
       method: method,
       url: url,
       data: method === 'POST' || method === 'PUT' ? stringify(params) : null,
-      params: method === 'GET' || method === 'DELETE' ? stringify(params) : null,
-      withCredentials: false,
+      params: method === 'GET' || method === 'DELETE' ? params : null,
+      withCredentials: true,
       headers: {
         'Content-Type': "application/x-www-form-urlencoded;charset=utf-8" //当post的时候请求头需要序列化
       }
@@ -29,7 +29,7 @@ function request(method = "GET", url, params) {
           resolve(res.data)
         } else {
           Toast.fail(res.data.msg);
-          reject(res.data)
+          reject(res.data);
         }
       })
       .catch(function (err) {

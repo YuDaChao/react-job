@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
+import { Redirect } from 'react-router-dom'
 import {
   NavBar,
   InputItem,
@@ -12,7 +13,7 @@ import AvatarList from '../../components/AvatarList'
 import userAction from "../../redux/action/userAction";
 
 
-class DetailInfo extends React.PureComponent {
+class DetailInfo extends React.Component {
   state = {
     avatar: '',
     post: '',
@@ -42,6 +43,10 @@ class DetailInfo extends React.PureComponent {
   };
 
   render() {
+    const { user } = this.props;
+    if (user && user.avatar) {
+      return <Redirect to="/niuren-info" />
+    }
     return [
       <div key="top" style={{ minHeight: '100%' }}>
         <div style={{ paddingBottom: 47}}>

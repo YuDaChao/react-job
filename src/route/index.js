@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Route,
   Switch,
-  Redirect
 } from 'react-router-dom'
 
 import Main from '../containers'
@@ -15,7 +14,6 @@ export default class RouteMap extends React.Component {
     return(
       <BrowserRouter>
         <Switch>
-          <Route key="index" path="/" render={() => <Redirect to="/login" />} exact />,
           {routeConfig.map(route => (
             <Route key={route.path} path={route.path} exact={route.exact} component={route.component} />
           ))}

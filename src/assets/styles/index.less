@@ -1,0 +1,54 @@
+.main {
+  :global {
+    .am-tab-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: inherit;
+      z-index: 100;
+    }
+    .am-navbar {
+      z-index: 100;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+    .am-list-brief {
+      padding: 5px 0;
+      &::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+    }
+    .am-list-item .am-list-line .am-list-content {
+      overflow: inherit;
+      white-space: inherit;
+    }
+    .am-list-item .am-list-line .am-list-extra {
+      flex-basis: 10%;
+    }
+    .am-list-item-me .am-list-content {
+      text-align: right;
+    }
+    .am-list-line::after {
+      content: "";
+      height: 0 !important;
+    }
+  }
+}
+
+.desc {
+  overflow: hidden;
+  color: #777272;
+}
+
+.term {
+  float: left;
+}
+
+.term::after {
+  content: ':';
+  margin-right: 8px;
+}
+

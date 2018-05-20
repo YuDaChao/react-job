@@ -17,7 +17,6 @@ function createAsyncAction(name, callback, meta = {}) {
             type: `${name}_SUCCESS`,
             payload: value,
           };
-
           dispatch(action);
           return action;
         })
@@ -28,7 +27,6 @@ function createAsyncAction(name, callback, meta = {}) {
             payload: err,
             error: true,
           };
-
           dispatch(action);
           return action;
         });

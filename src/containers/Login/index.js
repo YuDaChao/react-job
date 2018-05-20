@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import {
   WingBlank,
   WhiteSpace,
@@ -9,6 +10,8 @@ import {
 } from 'antd-mobile'
 
 import userAction from '../../redux/action/userAction'
+
+import { getRedirectPath } from '../../utils/util'
 
 import Logo from '../../components/Logo'
 
@@ -44,15 +47,11 @@ class Login extends React.PureComponent {
   };
 
   render() {
-    const { user } = this.props;
-    if (user) {
-      if (user.role === 0) {
-        this.props.history.push('/niuren')
-      } else {
-        this.props.history.push('/boss')
-      }
+    const { isLogined, user: { role, avatar } } = this.props;
+    if (isLogined) {
+      const path = getRedirectPath(role, avatar);
+      return <Redirect to={path}/>
     }
-
     return(
       <WingBlank>
         <Logo />
@@ -77,7 +76,8 @@ class Login extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  user: state.userReducer.user
+  user: state.userReducer.user,
+  isLogined: state.userReducer.isLogined,
 });
 
 const mapDispatchToProps = {
