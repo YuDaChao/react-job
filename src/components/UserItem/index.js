@@ -7,6 +7,7 @@ import {
   WingBlank,
   List,
 } from 'antd-mobile'
+import QueueAnim from 'rc-queue-anim';
 
 import '../../assets/styles/index.less'
 
@@ -23,7 +24,11 @@ class UserItem extends React.Component {
 
     return(
       <WingBlank size="lg" style={{ paddingBottom: 50}}>
-        {userList.map(u => ([
+        <QueueAnim className="demo-content"
+                   key="demo"
+                   type={['right', 'left']}
+                   ease={['easeOutQuart', 'easeInOutQuart']}>
+          {userList.map(u => ([
           <WhiteSpace key={`WhiteSpace-top-${u._id}`} size="lg" />,
             <Card
               key={`Card-${u._id}`}
@@ -55,6 +60,7 @@ class UserItem extends React.Component {
               </Card.Body>
             </Card>,
         ]))}
+        </QueueAnim>
       </WingBlank>
     )
   }

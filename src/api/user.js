@@ -48,3 +48,5 @@ export const getUsersByRole = (role) => get('/api/users/user-list', { role });
 export const sendMessage = (msg) => post('/api/chats/send', msg);
 
 export const getUserChats = () => get('/api/chats/list');
+
+export const updateChatStatus = (from) => post('/api/chats/edit-msg', { from });

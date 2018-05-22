@@ -7,7 +7,8 @@ const defaultState = () => ({
   isLogined: false,
   message: '',
   userMapObj: '', // 存放用户信息{userId: {}}
-  chatList: ''
+  chatList: '',
+  unReadCount: 0,
 });
 
 const getUserSuccess = (state, action) => ({
@@ -56,19 +57,27 @@ const registerFailure = (state, action) => ({
  */
 const sendMsgSuccess = (state, action) => ({
   ...state,
-  message: action.payload.data
+  message: action.payload
 });
 
-const receiveMsgSuccess = (state, action) => ({
-  ...state,
-  chatList: [...state.chatList, action.payload]
-});
+const receiveMsgSuccess = (state, action) => {
+  const chat = action.payload;
+  return {
+    ...state,
+    chatList: [...state.chatList, action.payload],
+    unReadCount: state.unReadCount + !chat.read && chat.to === state.user._id ? 1 : 0
+  }
+};
 
-const getUserChatsSuccess = (state, action) => ({
-  ...state,
-  userMapObj: action.payload.data.users,
-  chatList: action.payload.data.chats,
-});
+const getUserChatsSuccess = (state, action) => {
+  const { data: { users, chats } } = action.payload;
+  return {
+    ...state,
+    userMapObj: users,
+    chatList: chats,
+    unReadCount: chats.reduce((preNum, chat) => preNum + (!chat.read && chat.to === state.user._id ? 1 : 0),0)
+  }
+};
 
 export default createReducer(defaultState, {
   GET_USER_SUCCESS: getUserSuccess,

@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import {
   NavBar,
   List,
-  InputItem
+  InputItem,
+  Icon
 } from 'antd-mobile'
 
 import userAction from '../../redux/action/userAction'
 
 import '../../assets/styles/index.less'
-
+import QueueAnim from 'rc-queue-anim'
 const Item = List.Item;
 
 class Chat extends React.PureComponent {
@@ -86,9 +87,19 @@ class Chat extends React.PureComponent {
 
     return (
       <div className="main">
-        <NavBar>{userMapObj[targetId].userName}</NavBar>
+        <NavBar
+          icon={<Icon type="left" />}
+          onLeftClick={() => this.props.history.goBack()}
+        >
+          {userMapObj[targetId].userName}
+          </NavBar>
         <List>
-          {items}
+          <QueueAnim className="demo-content"
+                     key="demo"
+                     type={['right', 'left']}
+                     ease={['easeOutQuart', 'easeInOutQuart']}>
+              {items}
+          </QueueAnim>
         </List>
         <div
           className="am-tab-bar"

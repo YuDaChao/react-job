@@ -15,7 +15,7 @@ class FootNavbar extends React.PureComponent {
   };
 
   render() {
-    let { navList, location: { pathname } } = this.props;
+    let { navList, location: { pathname }, unReadCount } = this.props;
     navList = navList.filter(nav => !nav.hide);
     return(
       <TabBar>
@@ -23,6 +23,7 @@ class FootNavbar extends React.PureComponent {
           <Item
             key={nav.path}
             title={nav.text}
+            badge={nav.path === '/message' ? unReadCount : 0}
             icon={{uri: require(`./images/${nav.icon}.png`)}}
             selectedIcon={{uri: require(`./images/${nav.icon}-selected.png`)}}
             selected={pathname === nav.path}

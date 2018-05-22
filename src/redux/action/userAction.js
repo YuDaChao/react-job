@@ -6,7 +6,8 @@ import {
   completeUserInfo,
   getUserById,
   getUsersByRole,
-  getUserChats
+  getUserChats,
+  updateChatStatus
 } from '../../api/user'
 
 function initIO(dispatch, userId) {
@@ -56,6 +57,11 @@ function getUserList(role) {
   })
 }
 
+/**
+ * 这里没有使用自己封装的action函数 主要是要用到dispatch
+ * @param userId
+ * @returns {function(*=)}
+ */
 function getUserChatList(userId) {
   const name = 'GET_USER_CHATS';
   const meta = {};
@@ -111,14 +117,19 @@ function receiveMsg(msg) {
 }
 
 function sendMsg(msg) {
+  // 发消息
+  io.scoket.emit('sendMsg', msg);
   return createAsyncAction('GET_MSG', () => {
-    return new Promise((resolve, reject) => {
-      // 发消息
-      io.scoket.emit('sendMsg', msg);
-      resolve("")
-    })
+    return Promise.resolve(msg)
   })
 }
+
+function updateChat(from) {
+  return createAsyncAction('UPDATE_CHAT', () => {
+    return updateChatStatus(from)
+  })
+}
+
 
 
 export default {
@@ -129,5 +140,6 @@ export default {
   resetUser,
   getUserList,
   sendMsg,
-  getUserChatList
+  getUserChatList,
+  updateChat
 }

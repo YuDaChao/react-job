@@ -78,7 +78,7 @@ class Main extends React.PureComponent {
 
 
   render() {
-    const { user, location: { pathname } } = this.props;
+    const { user, location: { pathname }, unReadCount } = this.props;
     // 获取cookie信息
     const userId = Cookies.get('user_id');
 
@@ -109,7 +109,8 @@ class Main extends React.PureComponent {
 
     return(
       <div className="main">
-        {currentNav && <NavBar>{currentNav.title}</NavBar>}
+        {currentNav &&
+          <NavBar>{currentNav.title}</NavBar>}
         <div style={{ paddingTop: 45 }}>
           <Switch>
             {navList.map(nav => (
@@ -121,7 +122,7 @@ class Main extends React.PureComponent {
             <Route component={NotFound} />
           </Switch>
         </div>
-        {currentNav && <FootNavbar navList={navList} />}
+        {currentNav && <FootNavbar navList={navList} unReadCount={unReadCount} />}
       </div>
     )
   }
@@ -130,6 +131,7 @@ class Main extends React.PureComponent {
 const mapStateToProps = state => ({
   user: state.userReducer.user,
   errorMsg: state.userReducer.errorMsg,
+  unReadCount: state.userReducer.unReadCount,
 });
 
 const mapDispatchToProps = ({
