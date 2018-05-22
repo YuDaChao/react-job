@@ -10,7 +10,6 @@ import {
 import userAction from '../../redux/action/userAction'
 
 import '../../assets/styles/index.less'
-import QueueAnim from 'rc-queue-anim'
 const Item = List.Item;
 
 class Chat extends React.PureComponent {
@@ -18,6 +17,16 @@ class Chat extends React.PureComponent {
   state = {
     content: ''
   };
+
+  componentDidMount() {
+    // 初始显示列表
+    window.scrollTo(0, document.body.scrollHeight)
+  }
+
+  componentDidUpdate () {
+    // 更新显示列表
+    window.scrollTo(0, document.body.scrollHeight)
+  }
 
   handleClick = () => {
     const { user, match: { params: { userId } } } = this.props;
@@ -94,12 +103,7 @@ class Chat extends React.PureComponent {
           {userMapObj[targetId].userName}
           </NavBar>
         <List>
-          <QueueAnim className="demo-content"
-                     key="demo"
-                     type={['right', 'left']}
-                     ease={['easeOutQuart', 'easeInOutQuart']}>
-              {items}
-          </QueueAnim>
+          {items}
         </List>
         <div
           className="am-tab-bar"
