@@ -79,11 +79,10 @@ class Message extends React.PureComponent {
             const targetUser = userMapObj[targetUserId];
             return (
               <QueueAnim className="demo-content"
-                         key="demo"
+                         key={msg._id}
                          type={['right', 'left']}
                          ease={['easeOutQuart', 'easeInOutQuart']}>
                 <Item
-                  key={msg._id}
                   extra={<Badge text={msg.unReadCount}/>}
                   thumb={<img src={targetUser.avatar} alt="" />}
                   arrow='horizontal'
